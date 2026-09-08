@@ -2,9 +2,14 @@
 
 Prototipo navegable del autodiagnóstico de potencial GovTech del **Servicio 1 — Sello B-GovTech** de Bogotá Capital GovTech.
 
+## Ver el prototipo
+
+**[Abrir el autodiagnóstico publicado](https://giraldj8-glitch.github.io/sello-b-govtech-autodiagnostico/)**
+
 ## Contenido
 
 - [`2026-09-08_Autodiagnostico_Sello_B_GovTech_Experiencia_visual_v3.html`](./2026-09-08_Autodiagnostico_Sello_B_GovTech_Experiencia_visual_v3.html): experiencia interactiva completa en un único archivo HTML.
+- [`index.html`](./index.html): archivo de entrada utilizado por GitHub Pages.
 - [`2026-09-08_Entrega_autodiagnostico_Sello_B_GovTech_v3.md`](./2026-09-08_Entrega_autodiagnostico_Sello_B_GovTech_v3.md): alcance, criterios de diseño, trazabilidad y notas de validación.
 
 ## Alcance del prototipo
@@ -24,4 +29,3 @@ Este prototipo apoya una **prevalidación y orientación inicial**. No emite por
 1. Descarga o clona el repositorio.
 2. Abre `2026-09-08_Autodiagnostico_Sello_B_GovTech_Experiencia_visual_v3.html` en el navegador.
 3. Recorre el formulario y prueba los estados de navegación, ayuda, validación y resultado.
-
