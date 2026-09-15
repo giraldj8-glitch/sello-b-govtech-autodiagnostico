@@ -232,27 +232,42 @@ DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
  -->
+<style>
+.route-preview{max-width:1240px;margin:4px auto 0;padding:26px 40px 34px;position:relative;z-index:3;border-top:1px solid rgba(255,255,255,.24)}
+.route-preview-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:18px}.route-preview h2{margin:0;color:var(--white);font-size:22px}.route-preview-head p{max-width:610px;margin:0;color:#e8dff0;font-size:13px;line-height:1.6}
+.logic-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.2)}.logic-step{padding:16px;background:rgba(44,33,104,.72);min-height:104px}.logic-step b{display:block;color:var(--pink-light);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}.logic-step strong{display:block;color:#fff;font-size:15px;line-height:1.3}.logic-step span{display:block;color:#ddd4e9;font-size:12px;line-height:1.45;margin-top:5px}
+.trust-ladder{display:flex;align-items:center;gap:9px;margin:16px 0 18px;color:#fff;font-size:12px;font-weight:700}.trust-ladder span{padding:8px 11px;border:1px solid rgba(255,255,255,.28)}.trust-ladder i{font-style:normal;color:var(--pink-light)}
+.demo-label{margin:0 0 9px;color:#fff;font-size:13px;font-weight:700}.demo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.demo-actor{min-height:60px;border:1px solid rgba(255,255,255,.32);background:transparent;color:#fff;text-align:left;padding:11px 13px;border-radius:10px;font:inherit;cursor:pointer}.demo-actor strong{display:block;font-size:13px}.demo-actor span{display:block;margin-top:3px;color:#ddd4e9;font-size:11px}.demo-actor:hover,.demo-actor:focus-visible{background:#fff;color:var(--purple);border-color:#fff}.demo-actor:hover span,.demo-actor:focus-visible span{color:var(--plum)}
+.logic-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:99px;background:var(--lavender);color:var(--purple);font-size:11px;font-weight:700}.logic-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink)}
+.result-path{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0}.result-path span{background:var(--paper);padding:13px 11px;font-size:12px;font-weight:700;color:var(--purple)}.result-path .active{background:var(--lavender)}
+.profile-summary{border-left:4px solid var(--pink);padding:4px 0 4px 18px;margin:18px 0 24px}.profile-summary strong{display:block;font-size:18px}.profile-summary span{display:block;color:var(--muted);font-size:14px;line-height:1.5;margin-top:4px}
+.capability-list{margin:18px 0 30px}.capability{display:grid;grid-template-columns:46px minmax(0,1fr) 112px;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.cap-code{font-weight:800;color:var(--pink);font-size:13px}.capability strong{font-size:14px}.capability small{display:block;color:var(--muted);margin-top:3px;line-height:1.4}.cap-state{height:7px;background:var(--line);position:relative}.cap-state span{position:absolute;inset:0 auto 0 0;background:var(--purple);width:var(--score)}
+.outcome-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:22px 0}.outcome-grid h3{font-size:17px}.outcome-grid ul{padding-left:19px;font-size:14px;line-height:1.55}.badge-note{background:var(--purple);color:#fff;padding:20px;margin:22px 0}.badge-note strong{color:var(--pink-light)}
+@media(max-width:800px){.route-preview{padding:22px 20px 30px}.route-preview-head{display:block}.route-preview-head p{margin-top:8px}.logic-strip,.demo-grid{grid-template-columns:1fr 1fr}.trust-ladder{align-items:flex-start;flex-wrap:wrap}.capability{grid-template-columns:40px minmax(0,1fr)}.cap-state{grid-column:2}.outcome-grid{grid-template-columns:1fr}.result-path{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.logic-strip,.demo-grid{grid-template-columns:1fr}.route-preview{padding-inline:16px}.result-path{grid-template-columns:1fr}}
+@media print{.route-preview{display:none!important}}
+</style>
 </head>
-<body class="is-welcome">
+<body class="is-welcome" data-version="4">
 <a class="skip" href="#main">Ir a la pregunta</a>
-<header class="top"><div class="top-inner"><div class="brand"><div class="brand-mark">Bogotá Capital<strong>GOVTECH</strong></div><span class="brand-divider" aria-hidden="true"></span><span class="service-name"><strong>Sello B-GovTech</strong>Autodiagnóstico</span></div><div class="top-actions"><span class="prototype">Prototipo en revisión</span><button class="text-btn demo-load" id="example-button">Probar con un ejemplo</button></div></div></header>
+<header class="top"><div class="top-inner"><div class="brand"><div class="brand-mark">Bogotá Capital<strong>GOVTECH</strong></div><span class="brand-divider" aria-hidden="true"></span><span class="service-name"><strong>Sello B-GovTech</strong>Autodiagnóstico</span></div><div class="top-actions"><span class="prototype">Prototipo en revisión</span><button class="text-btn demo-load" id="example-button">Ver las 4 rutas</button></div></div></header>
 <section class="welcome welcome-seal" id="welcome" aria-labelledby="welcome-title">
   <div class="welcome-orb orb-a" aria-hidden="true"></div>
   <div class="welcome-orb orb-b" aria-hidden="true"></div>
   <div class="welcome-content">
     <div class="welcome-copy">
-      <p class="seal-kicker reveal-unit">Servicio 1 · Autodiagnóstico</p>
-      <h1 id="welcome-title" aria-label="Conoce tu punto de partida para el Sello B-GovTech">
-        <span class="reveal-mask"><span class="reveal-unit">Conoce tu</span></span>
-        <span class="reveal-mask"><span class="reveal-unit">punto de partida</span></span>
-        <span class="reveal-mask"><span class="reveal-unit accent">para el sello.</span></span>
+      <p class="seal-kicker reveal-unit">Servicio 1 · Perfil, capacidades y confianza</p>
+      <h1 id="welcome-title" aria-label="Haz visible lo que puedes aportar a lo público">
+        <span class="reveal-mask"><span class="reveal-unit">Haz visible</span></span>
+        <span class="reveal-mask"><span class="reveal-unit">lo que puedes aportar</span></span>
+        <span class="reveal-mask"><span class="reveal-unit accent">a lo público.</span></span>
       </h1>
-      <p class="welcome-lede reveal-unit">Reconoce qué tan preparada está tu solución para avanzar hacia el <strong>Sello B-GovTech</strong>: capacidad tecnológica, preparación para trabajar con el Estado y valor público.</p>
+      <p class="welcome-lede reveal-unit">Descubre tu perfil B-GovTech, reconoce capacidades que ya puedes demostrar y recibe una ruta concreta para fortalecerlas, conectarte o preparar su verificación.</p>
       <div class="welcome-actions reveal-unit">
         <button class="primary" id="begin">Iniciar camino al sello <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
         <button class="text-btn" id="about" aria-expanded="false" aria-controls="welcome-info">Cómo funciona <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
       </div>
-      <p class="welcome-note reveal-unit">El autodiagnóstico orienta y prepara la verificación. No entrega el sello, no asigna un puntaje oficial y no reemplaza la revisión de evidencias.</p>
+      <p class="welcome-note reveal-unit">El resultado inmediato es autodeclarado. Las insignias y el sello solo aparecen después de revisar evidencias.</p>
     </div>
     <div class="seal-scene" aria-hidden="true">
       <div class="seal-stage" id="seal-stage">
@@ -265,59 +280,76 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <svg class="seal-star" viewBox="0 0 80 80"><path d="M34 0h12v25L64 7l9 9-18 18h25v12H55l18 18-9 9-18-18v25H34V55L16 73l-9-9 18-18H0V34h25L7 16l9-9 18 18Z"/></svg>
           <span>Camino al</span><strong>Sello</strong><em>B-GovTech</em>
         </div>
-        <div class="seal-facet facet-1"><b>1</b><span>Organización</span></div>
-        <div class="seal-facet facet-2"><b>2</b><span>Solución</span></div>
-        <div class="seal-facet facet-3"><b>3</b><span>Preparación B2G</span></div>
-        <div class="seal-facet facet-4"><b>4</b><span>Valor público</span></div>
+        <div class="seal-facet facet-1"><b>1</b><span>Lo que aportas</span></div>
+        <div class="seal-facet facet-2"><b>2</b><span>Cómo lo haces</span></div>
+        <div class="seal-facet facet-3"><b>3</b><span>Trabajo público</span></div>
+        <div class="seal-facet facet-4"><b>4</b><span>Lo que muestras</span></div>
         <span class="spark spark-a"></span><span class="spark spark-b"></span><span class="spark spark-c"></span>
       </div>
       <p class="seal-caption">Cuatro miradas se integran para construir una lectura de preparación.</p>
     </div>
   </div>
+  <section class="route-preview" id="rutas" aria-labelledby="logic-title">
+    <div class="route-preview-head"><h2 id="logic-title">Así toma decisiones el recorrido</h2><p>Las respuestas no producen una nota única. Activan preguntas según el actor, leen capacidades transversales y recomiendan una conexión útil.</p></div>
+    <div class="logic-strip" aria-label="Cuatro fases del autodiagnóstico">
+      <div class="logic-step"><b>Fase 1</b><strong>Lo que vienes a aportar</strong><span>Actor, intención y contribución.</span></div>
+      <div class="logic-step"><b>Fase 2</b><strong>Cómo lo haces</strong><span>Prácticas, tecnología y aprendizaje.</span></div>
+      <div class="logic-step"><b>Fase 3</b><strong>Cómo trabajarías con lo público</strong><span>Riesgos, acuerdos y sostenibilidad.</span></div>
+      <div class="logic-step"><b>Fase 4</b><strong>Lo que puedes mostrar</strong><span>Evidencia, resultado y próximo paso.</span></div>
+    </div>
+    <div class="trust-ladder"><span>1 · Perfil autodeclarado</span><i>→</i><span>2 · Insignias por capacidad verificada</span><i>→</i><span>3 · Sello integral</span></div>
+    <p class="demo-label">Abre un resultado ficticio sin llenar el formulario:</p>
+    <div class="demo-grid">
+      <button class="demo-actor" data-demo="solution"><strong>Solucionador tecnológico</strong><span>Producto o servicio digital</span></button>
+      <button class="demo-actor" data-demo="ally"><strong>Aliado especializado</strong><span>Conocimiento o acompañamiento</span></button>
+      <button class="demo-actor" data-demo="articulator"><strong>Articulador</strong><span>Conecta necesidades y capacidades</span></button>
+      <button class="demo-actor" data-demo="public"><strong>Equipo público</strong><span>Formula una necesidad · ruta S3</span></button>
+    </div>
+  </section>
   <div class="welcome-info" id="welcome-info" hidden>
-    <div><h2>Todo el contenido de la matriz</h2><p>El recorrido contiene 18 bloques visibles que cubren los temas E5–E22. Algunos bloques agrupan respuestas relacionadas para evitar preguntas repetidas.</p></div>
+    <div><h2>Una ruta según tu papel</h2><p>El banco conserva los 18 bloques trabajados, pero cada actor recorre solo los que corresponden a su aporte. Una ruta típica contiene entre 12 y 15 preguntas.</p></div>
     <div><h2>Declaración primero; evidencia después</h2><p>En esta etapa no se cargan certificados, contratos ni datos personales. Al final verás una orientación para preparar la conversación y la verificación del sello.</p></div>
   </div>
-  <div class="welcome-foot"><div class="welcome-detail"><svg class="star" viewBox="0 0 80 80" aria-hidden="true"><path d="M34 0h12v25L64 7l9 9-18 18h25v12H55l18 18-9 9-18-18v25H34V55L16 73l-9-9 18-18H0V34h25L7 16l9-9 18 18Z"/></svg><p>18 bloques del diagnóstico.<br>Responder «todavía no» también identifica el próximo paso.</p></div><span>Bogotá Capital GovTech</span></div>
+  <div class="welcome-foot"><div class="welcome-detail"><svg class="star" viewBox="0 0 80 80" aria-hidden="true"><path d="M34 0h12v25L64 7l9 9-18 18h25v12H55l18 18-9 9-18-18v25H34V55L16 73l-9-9 18-18H0V34h25L7 16l9-9 18 18Z"/></svg><p>Preguntas adaptadas al actor.<br>Responder «todavía no» también identifica el próximo paso.</p></div><span>Bogotá Capital GovTech</span></div>
 </section>
 <div class="app-shell" id="app-shell" hidden><div class="wrap"><button class="return-home" id="home-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6"/></svg>Volver al inicio · conservar respuestas</button>
 <p class="eyebrow">Servicio 1 · Camino al Sello B-GovTech</p>
 <h1>Autodiagnóstico para el Sello B-GovTech</h1>
-<p class="lede">Recorre los 18 temas de la matriz para reconocer qué está listo, qué requiere apoyo y qué debería verificarse antes de una certificación.</p>
+<p class="lede">Tu ruta se adapta al actor que eliges y traduce las respuestas en capacidades, evidencias y una siguiente conexión.</p>
 <ol class="phases" aria-label="Fases del autodiagnóstico" id="phases"></ol>
-<div class="layout"><main class="main" id="main" tabindex="-1"></main><aside class="side"><svg class="side-star" viewBox="0 0 80 80" aria-hidden="true"><path d="M34 0h12v25L64 7l9 9-18 18h25v12H55l18 18-9 9-18-18v25H34V55L16 73l-9-9 18-18H0V34h25L7 16l9-9 18 18Z"/></svg><section><details class="phase-help" id="phase-help"><summary>Apoyo para responder</summary><h3 id="side-title">Tu punto de partida</h3><p id="side-purpose"></p><h3>Responde con lo que sabes hoy</h3><p>«Todavía no» y «no lo sé» ayudan a identificar apoyos. No son una sanción ni te hacen menos innovador.</p><hr><p class="quiet">18 bloques visibles. Algunos reúnen respuestas del mismo tema. Los campos opcionales están identificados.</p></details></section><section><details><summary>¿Qué entendemos por potencial GovTech?</summary><p style="margin-top:12px">La posibilidad de contribuir a una necesidad pública con tecnología, colaboración y pruebas que permitan aprender. El valor está en el cambio para las personas o la gestión pública, no solo en tener una herramienta.</p></details><p class="quiet">Prueba local: no envía ni guarda respuestas. Al recargar o cerrar, se pierden. Usa información ficticia; no compartas datos personales o reservados.</p></section></aside></div>
+<div class="layout"><main class="main" id="main" tabindex="-1"></main><aside class="side"><svg class="side-star" viewBox="0 0 80 80" aria-hidden="true"><path d="M34 0h12v25L64 7l9 9-18 18h25v12H55l18 18-9 9-18-18v25H34V55L16 73l-9-9 18-18H0V34h25L7 16l9-9 18 18Z"/></svg><section><details class="phase-help" id="phase-help"><summary>Apoyo para responder</summary><h3 id="side-title">Tu punto de partida</h3><p id="side-purpose"></p><h3>Responde con lo que sabes hoy</h3><p>«Todavía no» y «no lo sé» ayudan a identificar apoyos. No son una sanción ni te hacen menos innovador.</p><hr><p class="quiet">La ruta cambia según el actor. Cada bloque indica la capacidad que ayuda a comprender.</p></details></section><section><details><summary>¿Qué entendemos por potencial GovTech?</summary><p style="margin-top:12px">La posibilidad de contribuir a una necesidad pública con tecnología, colaboración y pruebas que permitan aprender. El valor está en el cambio para las personas o la gestión pública, no solo en tener una herramienta.</p></details><p class="quiet">Prueba local: no envía ni guarda respuestas. Al recargar o cerrar, se pierden. Usa información ficticia; no compartas datos personales o reservados.</p></section></aside></div>
 </div>
-</div><footer class="footer"><p>Sello B-GovTech · Propuesta de experiencia v3, 8 de septiembre de 2026</p><p>Resultado autodeclarado. Certificación y revisión de evidencias: etapa posterior.</p></footer>
+</div><footer class="footer"><p>Sello B-GovTech · Propuesta de experiencia v4, 15 de septiembre de 2026</p><p>Perfil autodeclarado. Insignias y sello: solo después de verificación.</p></footer>
 <noscript>Para probar este formulario, activa JavaScript. El prototipo no envía datos.</noscript>
 <script id="model" type="application/json">{
   "phases": [
     {
       "id": 1,
-      "name": "Identificación para el Sello B-GovTech",
-      "short": "Organización",
-      "purpose": "Reconocer quién presenta la solución y desde qué tipo de organización. Estos datos ubican la postulación; no otorgan mérito por sí solos.",
-      "intro": "Empecemos por la organización y la solución que quieres llevar al camino del Sello B-GovTech."
+      "name": "Lo que vienes a aportar",
+      "short": "Tu aporte",
+      "purpose": "Reconocer el actor, su intención y el tipo de contribución que quiere hacer al ecosistema.",
+      "intro": "Empecemos por tu papel en el ecosistema. Esta respuesta activa una ruta distinta; no define todavía si recibes el sello."
     },
     {
       "id": 2,
-      "name": "Capacidad tecnológica y de innovación",
-      "short": "Solución",
-      "purpose": "Comprender la madurez, la capacidad de adaptación, los aprendizajes y los cuidados técnicos de la solución.",
-      "intro": "Responde sobre una sola solución y sobre su estado actual. Reconocer una brecha también sirve para orientar el siguiente paso."
+      "name": "Cómo lo haces",
+      "short": "Capacidades",
+      "purpose": "Comprender las prácticas, la tecnología, la colaboración y el aprendizaje que sostienen el aporte.",
+      "intro": "Responde sobre lo que haces hoy. Una brecha no te excluye: ayuda a elegir el siguiente apoyo."
     },
     {
       "id": 3,
-      "name": "Preparación para trabajar con el Estado",
-      "short": "Preparación B2G",
-      "purpose": "Identificar si la organización puede preparar, sostener y demostrar un alcance acordado con una entidad pública.",
-      "intro": "Aquí no buscamos experiencia perfecta: queremos saber qué está listo y qué tendría que prepararse antes de una verificación."
+      "name": "Cómo trabajarías con lo público",
+      "short": "Trabajo público",
+      "purpose": "Identificar si la organización puede acordar, implementar y sostener una colaboración responsable con una entidad pública.",
+      "intro": "Aquí no buscamos experiencia perfecta: queremos saber qué está listo y qué apoyo conviene antes de una colaboración."
     },
     {
       "id": 4,
-      "name": "Valor público y evidencia",
-      "short": "Valor público",
-      "purpose": "Relacionar la solución con una situación pública, las personas afectadas, el cambio esperado y una forma de observarlo.",
-      "intro": "El sello necesita mirar más allá de la tecnología: qué cambia para lo público y cómo podría comprobarse."
+      "name": "Lo que puedes mostrar",
+      "short": "Evidencia",
+      "purpose": "Relacionar el aporte con una necesidad pública, las personas afectadas, el cambio esperado y la evidencia disponible.",
+      "intro": "Cerramos con lo que puedes mostrar hoy y con lo que tendría que verificarse después."
     }
   ],
   "blocks": [
@@ -326,23 +358,24 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       "phase": 1,
       "source": "Matriz E5–E6",
       "category": "Identificación",
-      "title": "¿Quién presenta esta solución?",
+      "title": "¿Quién participa y desde qué organización?",
       "help": "Usa información ficticia en este prototipo. No pedimos NIT, nombres de personas ni perfiles de LinkedIn.",
       "fields": [
         {"id":"org_name","type":"text","label":"Nombre de la organización o equipo","placeholder":"Ej. Equipo Río","required":true,"max":100},
         {"id":"responsible_role","type":"text","label":"Rol de quien responde por la postulación","placeholder":"Ej. líder de producto o representante legal","required":true,"max":100},
-        {"id":"org_web","type":"text","label":"Sitio web o perfil institucional","placeholder":"Opcional; no uses un perfil personal","required":false,"max":160}
+        {"id":"org_web","type":"text","label":"Sitio web o perfil institucional","placeholder":"Opcional; no uses un perfil personal","required":false,"max":160},
+        {"id":"org_type","type":"radio","label":"Naturaleza de la organización","required":true,"options":[["private","Empresa privada"],["public_company","Empresa pública"],["mixed","Empresa de capital mixto"],["academy","Universidad o centro de investigación"],["public_entity","Entidad pública"],["team","Equipo aún no constituido"],["other","Otro tipo de organización"]]}
       ]
     },
     {
       "id": "B02",
       "phase": 1,
-      "source": "Matriz E7",
-      "category": "Naturaleza de la organización",
-      "title": "¿Qué tipo de organización responde por la solución?",
-      "help": "Elige su naturaleza actual. Academia y equipos no constituidos pueden completar el diagnóstico; la elegibilidad para recibir el sello requiere una decisión posterior.",
+      "source": "Decisión de ruta",
+      "category": "Papel en el ecosistema",
+      "title": "¿Cuál describe mejor lo que vienes a aportar?",
+      "help": "No es una jerarquía. Elige el papel que mejor representa tu contribución actual; el recorrido adaptará las siguientes preguntas.",
       "fields": [
-        {"id":"org_type","type":"radio","label":"Tipo de organización","required":true,"options":[["private","Empresa privada"],["public_company","Empresa pública"],["mixed","Empresa de capital mixto"],["academy","Universidad o centro de investigación"],["public_entity","Entidad pública"],["team","Equipo aún no constituido"],["other","Otro tipo de organización"]]}
+        {"id":"actor_role","type":"radio","label":"Papel principal","required":true,"options":[["solution","Solucionador tecnológico — aporta una solución o producto digital"],["ally","Aliado especializado — aporta conocimiento, pruebas o acompañamiento"],["articulator","Articulador — conecta necesidades, actores y capacidades"],["public","Equipo público — tiene una necesidad o reto que quiere formular"]]}
       ]
     },
     {
@@ -350,11 +383,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       "phase": 1,
       "source": "Matriz E16",
       "category": "Identificación de la solución",
-      "title": "¿Qué solución quieres llevar al camino del sello?",
-      "help": "Nombra una sola solución y explica la tarea concreta que hace posible gracias a la tecnología. La evidencia se revisaría después; aquí no se cargan archivos.",
+      "title": "¿Qué solución, servicio o capacidad quieres aportar?",
+      "help": "Describe una contribución concreta. Puede ser tecnología, conocimiento especializado o capacidad de articulación. La evidencia se revisaría después; aquí no se cargan archivos.",
       "fields": [
-        {"id":"solution_name","type":"text","label":"Nombre de la solución","placeholder":"Puede ser un nombre de trabajo","required":true,"max":100},
-        {"id":"solution_task","type":"textarea","label":"¿Qué hace gracias a la tecnología?","placeholder":"Ej. detecta una fuga y avisa al equipo que puede atenderla","required":true,"max":420,"allowHelp":true},
+        {"id":"solution_name","type":"text","label":"Nombre de la solución, servicio o capacidad","placeholder":"Puede ser un nombre de trabajo","required":true,"max":100},
+        {"id":"solution_task","type":"textarea","label":"¿Qué permite hacer o mejorar?","placeholder":"Ej. detectar una fuga, probar una solución o conectar el reto con capacidades pertinentes","required":true,"max":420,"allowHelp":true},
         {"id":"solution_evidence","type":"radio","label":"¿Qué podrían compartir después para mostrar cómo funciona?","required":false,"options":[["demo","Demostración o video"],["case","Documento o caso de uso"],["session","Mostrarla en una sesión"],["reserved","Material reservado; requiere un canal autorizado"],["notyet","Todavía no tenemos material"]]}
       ]
     },
@@ -452,7 +485,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       "phase": 3,
       "source": "Matriz E11",
       "category": "Recursos para cumplir",
-      "title": "¿Han calculado los recursos necesarios para ofrecer la solución a una entidad pública?",
+      "title": "¿Han calculado los recursos necesarios para aportar en una colaboración pública?",
       "help": "Considera personas, gastos y condiciones de pago del alcance que ofrecerían. No pedimos cifras reservadas ni exigimos soportar un plazo universal de 90–120 días.",
       "fields": [
         {"id":"resources","type":"radio","label":"Planificación de recursos","required":true,"options":[["planned","Sí, y tenemos un plan para cubrirlos"],["gap","Sí, pero faltan recursos por asegurar"],["partial","Tenemos una estimación incompleta"],["notyet","Todavía no los hemos calculado"]]}
@@ -463,7 +496,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       "phase": 3,
       "source": "Matriz E12",
       "category": "Soporte proporcional",
-      "title": "¿Cómo atenderían una falla mientras se usa la solución?",
+      "title": "¿Cómo sostendrían el aporte si aparece una dificultad durante su uso?",
       "help": "El horario y la respuesta deben corresponder al uso acordado. Ofrecer 24/7 no vale más si el servicio no lo necesita.",
       "fields": [
         {"id":"support","type":"radio","label":"Preparación de soporte","required":true,"options":[["tested","Hay responsables y un procedimiento que ya usamos"],["defined","Hay responsables y un procedimiento aún no probado"],["case","La resolvemos caso a caso"],["unknown","Todavía no definimos cómo atenderla"]]}
@@ -496,7 +529,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       "phase": 4,
       "source": "Matriz E8",
       "category": "Categoría de valor público",
-      "title": "¿En qué se notaría principalmente el valor público de la solución?",
+      "title": "¿En qué se notaría principalmente el valor público de su aporte?",
       "help": "Elige la contribución principal. Las categorías pueden relacionarse, pero marcar más no significa generar más valor.",
       "fields": [
         {"id":"public_value","type":"radio","label":"Contribución principal","required":true,"options":[["administrative","Gestión pública más sencilla y eficaz — valor administrativo"],["democratic","Más participación, transparencia o control — valor democrático"],["social","Más bienestar, acceso a derechos o mejores servicios — valor social"],["unknown","Necesitamos ayuda para ubicarla"]]}
@@ -538,12 +571,36 @@ const blockById=Object.fromEntries(blocks.map(b=>[b.id,b]));
 const fieldById=Object.fromEntries(blocks.flatMap(b=>b.fields.map(f=>[f.id,f])));
 const main=document.getElementById('main');
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
-let answers={},activeIndex=0,view='welcome',returnToReview=false,demo=false,motionDirection=1;
+let answers={},activeIndex=0,view='welcome',returnToReview=false,demo=false,demoActor='',motionDirection=1;
 const visited=new Set([blocks[0].id]);
 const escapeHtml=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const answer=id=>answers[id]??{value:'',detail:''};
 const value=id=>answer(id).value??'';
 const shouldAnimate=()=>!reduceMotion.matches&&!document.body.classList.contains('keyboard');
+const ROLE_NAMES={solution:'Solucionador tecnológico',ally:'Aliado especializado',articulator:'Articulador',public:'Equipo público'};
+const BLOCK_META={
+  B01:['Perfil','Ubica a quien participa y su naturaleza organizacional.'],B02:['Ruta','Activa preguntas según el papel elegido.'],
+  B03:['C2 · Tecnología','Hace visible la solución, servicio o capacidad aportada.'],B04:['C2 · Tecnología','Reconoce el estado real del aporte.'],
+  B05:['C6 · Sostenibilidad','Aclara quién puede adaptar y responder por el aporte.'],B06:['C3 · Cocreación','Observa escucha, prueba y aprendizaje.'],
+  B07:['C4 · Confianza','Revisa derechos, licencias y continuidad.'],B08:['C2 · Tecnología','Observa posibilidades de integración.'],
+  B09:['C2 · Tecnología','Observa interoperabilidad y portabilidad.'],B10:['C4 · Confianza','Activa revisión de datos, decisiones y riesgos.'],
+  B11:['C6 · Sostenibilidad','Reconoce condiciones reales de uso.'],B12:['C5 · Colaboración B2G','Prepara alcance, recursos y acuerdos.'],
+  B13:['C6 · Sostenibilidad','Aclara soporte y continuidad.'],B14:['C5 · Colaboración B2G','Orienta acompañamiento para trabajar con el Estado.'],
+  B15:['Evidencia','Prepara la verificación de existencia y representación.'],B16:['C1 · Valor público','Relaciona el aporte con una forma de valor público.'],
+  B17:['C1 · Valor público','Ubica la necesidad, las personas y barreras.'],B18:['C1 · Valor público','Formula cambio esperado y evidencia.']
+};
+for(const block of blocks){const meta=BLOCK_META[block.id]??['Capacidad','Aporta a la lectura del perfil.'];block.logic=meta[0];block.logicNote=meta[1];}
+const ROUTES={
+  solution:new Set(blocks.map(b=>b.id)),
+  ally:new Set(['B01','B02','B03','B05','B06','B07','B10','B12','B13','B14','B15','B16','B17','B18']),
+  articulator:new Set(['B01','B02','B03','B06','B10','B12','B13','B14','B15','B16','B17','B18']),
+  public:new Set(['B01','B02','B16','B17','B18'])
+};
+function actorRole(){return value('actor_role');}
+function blockVisible(block){const role=actorRole();return role?ROUTES[role]?.has(block.id):['B01','B02'].includes(block.id);}
+function visibleBlocks(){return blocks.filter(blockVisible);}
+function visiblePhaseBlocks(phase){return visibleBlocks().filter(b=>b.phase===phase);}
+function nextVisibleIndex(direction=1){for(let i=activeIndex+direction;i>=0&&i<blocks.length;i+=direction)if(blockVisible(blocks[i]))return i;return -1;}
 
 document.addEventListener('keydown',()=>{
   document.body.classList.add('keyboard');
@@ -567,17 +624,18 @@ function answerText(field){
   const label=field.type==='radio'?optionLabel(field,a.value):a.value;
   return label+(a.detail?' — '+a.detail:'');
 }
-function firstBlockOfPhase(phase){return blocks.find(b=>b.phase===phase);}
+function firstBlockOfPhase(phase){return visiblePhaseBlocks(phase)[0];}
 
 function navigation(phase){
   document.getElementById('phases').innerHTML=model.phases.map(p=>{
-    const first=firstBlockOfPhase(p.id),reachable=visited.has(first.id);
-    const phaseBlocks=blocks.filter(b=>b.phase===p.id);
-    const done=phaseBlocks.every(blockValid);
+    const first=firstBlockOfPhase(p.id),reachable=Boolean(first&&visited.has(first.id));
+    const phaseBlocks=visiblePhaseBlocks(p.id);
+    const done=phaseBlocks.length>0&&phaseBlocks.every(blockValid);
     return `<li class="phase ${p.id===phase?'current':done?'done':''}"><button type="button" data-phase="${p.id}" ${reachable?'':'disabled'} ${p.id===phase?'aria-current="step"':''}><span class="number">${p.id}</span><span>${escapeHtml(p.short)}</span></button></li>`;
   }).join('');
   document.querySelectorAll('[data-phase]').forEach(button=>button.onclick=()=>{
     const target=blocks.indexOf(firstBlockOfPhase(Number(button.dataset.phase)));
+    if(target<0)return;
     motionDirection=target<activeIndex?-1:1;
     go(target);
   });
@@ -656,19 +714,21 @@ function go(target,push=true){
 function renderBlock(){
   const block=blocks[activeIndex];navigation(block.phase);
   const first=firstBlockOfPhase(block.phase)===block;
-  const progress=Math.round(((activeIndex+1)/blocks.length)*100);
+  const route=visibleBlocks(),routeIndex=route.indexOf(block);
+  const progress=Math.round(((routeIndex+1)/route.length)*100),isLast=nextVisibleIndex(1)<0;
   main.innerHTML=`
-    ${demo?'<div class="demo-tag">Ejemplo ficticio para recorrer el diagnóstico</div>':''}
+    ${demo?`<div class="demo-tag">Ejemplo ficticio · ${escapeHtml(demoActor)}</div>`:''}
     <div class="completion" aria-label="${progress}% del recorrido"><span style="--progress:${progress}%"></span></div>
-    <div class="question-meta"><span><span class="id">Fase ${block.phase} de 4</span><span>Bloque ${activeIndex+1} de ${blocks.length}</span><span class="block-source">${escapeHtml(block.source)}</span></span>${activeIndex?'<button class="back" id="back">Volver</button>':''}</div>
+    <div class="question-meta"><span><span class="id">Fase ${block.phase} de 4</span><span>Pregunta ${routeIndex+1} de ${route.length}</span><span class="logic-pill">${escapeHtml(block.logic)}</span></span>${routeIndex?'<button class="back" id="back">Volver</button>':''}</div>
     ${first?`<p class="phase-intro">${escapeHtml(model.phases[block.phase-1].intro)}</p>`:''}
     <form id="block-form" novalidate>
       <h2 class="block-title" id="block-title">${escapeHtml(block.title)}</h2>
       <p class="hint" id="block-help">${escapeHtml(block.help)}</p>
+      <p class="block-summary"><strong>Por qué se pregunta:</strong> ${escapeHtml(block.logicNote)}</p>
       <p class="block-summary">${block.fields.length===1?'Una respuesta en este bloque.':`${block.fields.length} respuestas relacionadas en este bloque.`}</p>
       ${block.fields.map(renderField).join('')}
       <div id="error" class="error block-error" role="alert"></div>
-      <div class="actions"><button class="primary" type="submit">${activeIndex===blocks.length-1?'Revisar mis respuestas':'Continuar'} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button></div>
+      <div class="actions"><button class="primary" type="submit">${isLast?'Revisar mis respuestas':'Continuar'} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button></div>
     </form>`;
   bindFields(block);
   main.querySelector('#block-form').onsubmit=e=>{
@@ -680,25 +740,27 @@ function renderBlock(){
       main.querySelector(`[name="${firstMissing.id}"],#${firstMissing.id},#${firstMissing.id}-other`)?.focus();return;
     }
     if(returnToReview){returnToReview=false;showReview();return;}
-    if(activeIndex===blocks.length-1){showReview();return;}
-    motionDirection=1;go(activeIndex+1);
+    const next=nextVisibleIndex(1);
+    if(next<0){showReview();return;}
+    motionDirection=1;go(next);
   };
-  main.querySelector('#back')?.addEventListener('click',()=>{motionDirection=-1;go(activeIndex-1);});
+  main.querySelector('#back')?.addEventListener('click',()=>{const previous=nextVisibleIndex(-1);if(previous>=0){motionDirection=-1;go(previous);}});
 }
 
 function blockAnswers(block){
   return block.fields.map(field=>`<p class="review-label">${escapeHtml(field.label)}</p><p class="review-answer">${escapeHtml(answerText(field))}</p>`).join('');
 }
-function reviewMap(){return model.phases.map(p=>`<span class="${blocks.filter(b=>b.phase===p.id).every(blockValid)?'done':''}" title="${escapeHtml(p.short)}"></span>`).join('');}
+function reviewMap(){return model.phases.map(p=>{const phaseBlocks=visiblePhaseBlocks(p.id);return `<span class="${phaseBlocks.length&&phaseBlocks.every(blockValid)?'done':''}" title="${escapeHtml(p.short)}"></span>`;}).join('');}
 function showReview(push=true){
   view='review';if(push)history.pushState({view},'',location.pathname+location.search+'#revision');navigation(4);
-  const missing=blocks.flatMap(b=>b.fields.filter(f=>!fieldValid(f)));
+  const route=visibleBlocks();
+  const missing=route.flatMap(b=>b.fields.filter(f=>!fieldValid(f)));
   main.innerHTML=`
-    ${demo?'<div class="demo-tag">Ejemplo ficticio para recorrer el diagnóstico</div>':''}
-    <p class="eyebrow">Antes de ver la orientación</p><h2 class="block-title">Revisa las 18 partes del diagnóstico</h2>
-    <p class="hint">Incluimos todos los temas de la matriz. Puedes cambiar cualquier respuesta; lo que ves es una declaración, no una verificación.</p>
+    ${demo?`<div class="demo-tag">Ejemplo ficticio · ${escapeHtml(demoActor)}</div>`:''}
+    <p class="eyebrow">Antes de ver la orientación</p><h2 class="block-title">Revisa tu ruta de ${route.length} preguntas</h2>
+    <p class="hint">El recorrido corresponde a <strong>${escapeHtml(ROLE_NAMES[actorRole()]??'tu perfil')}</strong>. Puedes cambiar cualquier respuesta; lo que ves es una declaración, no una verificación.</p>
     <div class="review-map" aria-label="Las cuatro fases están recorridas">${reviewMap()}</div>
-    ${model.phases.map(p=>`<h3 class="review-heading">${p.id}. ${escapeHtml(p.name)}</h3>${blocks.filter(b=>b.phase===p.id).map(b=>`<div class="review-row"><div><p class="block-source">${escapeHtml(b.source)}</p>${blockAnswers(b)}</div><button class="text-btn" data-edit="${b.id}">${blockValid(b)?'Cambiar':'Completar'}</button></div>`).join('')}`).join('')}
+    ${model.phases.map(p=>{const phaseBlocks=route.filter(b=>b.phase===p.id);return phaseBlocks.length?`<h3 class="review-heading">${p.id}. ${escapeHtml(p.name)}</h3>${phaseBlocks.map(b=>`<div class="review-row"><div><p class="logic-pill">${escapeHtml(b.logic)}</p>${blockAnswers(b)}</div><button class="text-btn" data-edit="${b.id}">${blockValid(b)?'Cambiar':'Completar'}</button></div>`).join('')}`:'';}).join('')}
     ${missing.length?`<p class="error">Faltan ${missing.length} respuestas requeridas. Usa «Completar» antes de continuar.</p>`:''}
     <label class="help-check"><input type="checkbox" id="confirm"><span>Revisé mis respuestas y reflejan lo que conoce la organización hoy.</span></label>
     <p class="quiet">Esta confirmación corresponde al tema E14 de la matriz. No verifica la información, no la publica y no otorga el sello.</p>
@@ -710,39 +772,79 @@ function showReview(push=true){
 }
 
 function signal(title,body,note){return `<section class="signal"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body)}</p><small>${escapeHtml(note)}</small></section>`;}
+const scoreMap=(id,map)=>map[value(id)]??0;
+const readyText=id=>{const v=value(id);return Boolean(v&&v!=='unknown'&&v!=='__help__');};
+const average=(...values)=>Math.max(0,Math.min(3,Math.round(values.reduce((sum,n)=>sum+n,0)/values.length)));
+function capabilityProfile(){
+  const c1=average(readyText('public_situation')?3:0,readyText('expected_change')?3:0,scoreMap('measurement',{both:3,records:2,experience:2,other:2,unknown:0}));
+  const c2=average(scoreMap('stage',{idea:0,built:1,controlled:2,real:3,use:3,unknown:0}),scoreMap('integration',{used:3,ready:2,planned:1,closed:0,unknown:0}),scoreMap('portability',{open:3,export:2,partial:1,closed:0,unknown:0}));
+  const c3=scoreMap('learning',{applied:3,nochange:2,pending:2,notyet:0});
+  const c4=average(scoreMap('rights',{rights:3,license:3,combined:2,checking:1,none:0,unknown:0}),readyText('personal_data')?2:0,readyText('automated_decision')?2:0);
+  const c5=average(scoreMap('resources',{planned:3,gap:2,partial:1,notyet:0}),scoreMap('b2g_experience',{delivered:3,submitted:2,draft:2,learning:1,none:0,unknown:0}),scoreMap('legal_evidence',{ready:3,identify:2,pending:1,notapply:1,unknown:0}));
+  const c6=average(scoreMap('tech_owner',{team:3,shared:3,ally:2,unagreed:1,unknown:0}),scoreMap('support',{tested:3,defined:2,case:1,unknown:0}),scoreMap('environments',{tested:3,designed:2,single:2,barrier:1,unknown:0}));
+  const c7={solution:1,ally:2,articulator:3,public:2}[actorRole()]??0;
+  const all=[
+    {code:'C1',name:'Comprender el problema y el valor público',score:c1,reason:'Necesidad, personas, cambio esperado y forma de observarlo.'},
+    {code:'C2',name:'Aplicar tecnología e interoperar',score:c2,reason:'Madurez, integración y portabilidad del aporte.'},
+    {code:'C3',name:'Cocrear, probar y aprender',score:c3,reason:'Uso de hallazgos de personas usuarias o aliadas.'},
+    {code:'C4',name:'Gestionar datos, derechos y riesgos',score:c4,reason:'Permisos y reconocimiento de condiciones sensibles.'},
+    {code:'C5',name:'Preparar una colaboración B2G',score:c5,reason:'Alcance, recursos, experiencia y soportes.'},
+    {code:'C6',name:'Implementar, sostener y escalar',score:c6,reason:'Adaptación, soporte y condiciones de uso.'},
+    {code:'C7',name:'Aportar y activar el ecosistema',score:c7,reason:'Capacidad de conectar conocimiento, actores y necesidades.'}
+  ];
+  const scope={solution:['C1','C2','C3','C4','C5','C6'],ally:['C1','C3','C4','C5','C6','C7'],articulator:['C1','C3','C4','C5','C7'],public:['C1','C7']}[actorRole()]??all.map(c=>c.code);
+  return all.filter(c=>scope.includes(c.code));
+}
+function stateLabel(score){return ['Por explorar','En construcción','En práctica','Listo para demostrar'][score]??'Por explorar';}
+function resultNext(role,priorities){
+  if(role==='public')return 'Conexión sugerida: Servicio 3 · formular y publicar la necesidad para encontrar capacidades pertinentes.';
+  if(role==='articulator')return 'Conexión sugerida: mapa del ecosistema y Servicio 4 · hacer visibles actores, capacidades y oportunidades de conexión.';
+  if(role==='ally')return 'Conexión sugerida: validar una capacidad especializada y publicarla para que pueda combinarse con soluciones y retos.';
+  return priorities.length?'Conexión sugerida: una ruta de fortalecimiento antes de pedir verificación; luego, contraste con un reto público real.':'Conexión sugerida: preparar evidencias y solicitar la conversación de verificación del Servicio 1.';
+}
 function showResult(push=true){
-  if(blocks.some(b=>!blockValid(b))){showReview();return;}
+  const route=visibleBlocks();
+  if(route.some(b=>!blockValid(b))){showReview();return;}
   view='result';if(push)history.pushState({view},'',location.pathname+location.search+'#orientacion-sello');navigation(4);
+  const role=actorRole(),roleName=ROLE_NAMES[role]??'Perfil por orientar',caps=capabilityProfile();
+  const strengths=[...caps].sort((a,b)=>b.score-a.score).filter(c=>c.score>=2).slice(0,3);
+  const priorities=[...caps].sort((a,b)=>a.score-b.score).filter(c=>c.score<2).slice(0,2);
+  const badgeCandidates=caps.filter(c=>c.score===3).slice(0,2);
   const todos=[];
-  if(['idea','built','unknown'].includes(value('stage')))todos.push('Acordar una prueba segura que permita observar la solución en uso y aprender de personas usuarias.');
-  if(['unagreed','unknown'].includes(value('tech_owner')))todos.push('Definir quién responde por corregir y adaptar la solución antes de solicitar verificación.');
-  if(['checking','none','unknown'].includes(value('rights')))todos.push('Aclarar derechos, licencias y responsabilidades de mantenimiento.');
-  if(['planned','closed','unknown'].includes(value('integration'))||['partial','closed','unknown'].includes(value('portability')))todos.push('Precisar cómo se integraría la solución y cómo podría recuperarse o reutilizarse su información.');
-  if(['yes','unknown'].includes(value('personal_data'))||['yes','unknown'].includes(value('automated_decision')))todos.push('Realizar una revisión especializada de datos, decisiones y posibles efectos sobre personas antes de una prueba real.');
-  if(['gap','partial','notyet'].includes(value('resources')))todos.push('Definir un alcance y un plan realista de personas, gastos y condiciones de pago.');
-  if(['case','unknown'].includes(value('support')))todos.push('Acordar responsables y un procedimiento de soporte proporcional al uso esperado.');
-  if(['none','learning','unknown'].includes(value('b2g_experience')))todos.push('Preparar acompañamiento sobre oferta pública, alcance, responsabilidades y forma de contratación.');
-  if(value('legal_evidence')!=='ready')todos.push('Confirmar qué documento demuestra existencia y representación según la naturaleza de la organización.');
-  if(value('public_value')==='unknown'||value('public_situation')==='__help__'||value('beneficiary')==='unknown')todos.push('Precisar la situación pública, las personas afectadas y la contribución principal de valor público.');
-  if(value('expected_change')==='__help__'||value('measurement')==='unknown')todos.push('Definir un cambio observable y una forma proporcionada de documentarlo.');
-  if(!todos.length)todos.push('Contrastar las declaraciones con evidencia y acordar los criterios de verificación. Completar el diagnóstico no demuestra por sí solo que la solución deba recibir el sello.');
+  if(role==='public'){
+    todos.push('Precisar la necesidad, las personas afectadas y el cambio que el equipo público espera observar.','Definir restricciones, contexto y evidencia disponible antes de publicar el reto.','Conectar la ficha inicial con el Servicio 3 para formular y movilizar capacidades del ecosistema.');
+  }else{
+    if(['idea','built','unknown'].includes(value('stage')))todos.push('Acordar una prueba segura que permita observar la solución en uso y aprender de personas usuarias.');
+    if(['unagreed','unknown'].includes(value('tech_owner')))todos.push('Definir quién responde por corregir y adaptar la solución antes de solicitar verificación.');
+    if(['checking','none','unknown'].includes(value('rights')))todos.push('Aclarar derechos, licencias y responsabilidades de mantenimiento.');
+    if(['planned','closed','unknown'].includes(value('integration'))||['partial','closed','unknown'].includes(value('portability')))todos.push('Precisar cómo se integraría la solución y cómo podría recuperarse o reutilizarse su información.');
+    if(['yes','unknown'].includes(value('personal_data'))||['yes','unknown'].includes(value('automated_decision')))todos.push('Realizar una revisión especializada de datos, decisiones y posibles efectos sobre personas antes de una prueba real.');
+    if(['gap','partial','notyet'].includes(value('resources')))todos.push('Definir un alcance y un plan realista de personas, gastos y condiciones de pago.');
+    if(['case','unknown'].includes(value('support')))todos.push('Acordar responsables y un procedimiento de soporte proporcional al uso esperado.');
+    if(['none','learning','unknown'].includes(value('b2g_experience')))todos.push('Preparar acompañamiento sobre oferta pública, alcance, responsabilidades y forma de contratación.');
+    if(value('legal_evidence')!=='ready')todos.push('Confirmar qué documento demuestra existencia y representación según la naturaleza de la organización.');
+    if(value('public_value')==='unknown'||value('public_situation')==='__help__'||value('beneficiary')==='unknown')todos.push('Precisar la situación pública, las personas afectadas y la contribución principal de valor público.');
+    if(value('expected_change')==='__help__'||value('measurement')==='unknown')todos.push('Definir un cambio observable y una forma proporcionada de documentarlo.');
+    if(!todos.length)todos.push('Contrastar las declaraciones con evidencia y acordar los criterios de verificación. Completar el diagnóstico no demuestra por sí solo que la solución deba recibir el sello.');
+  }
   const star='<svg viewBox="0 0 80 80" aria-hidden="true"><path d="M34 0h12v25L64 7l9 9-18 18h25v12H55l18 18-9 9-18-18v25H34V55L16 73l-9-9 18-18H0V34h25L7 16l9-9 18 18Z"/></svg>';
   main.innerHTML=`
-    ${demo?'<div class="demo-tag">Resultado de un ejemplo ficticio</div>':''}
-    <div class="result-mark">${star}</div><p class="result-ready">Mapa de preparación listo</p>
-    <h2 class="result-title">Tu punto de partida para avanzar hacia el Sello B-GovTech</h2>
-    <p class="hint">Esta orientación resume lo declarado en los 18 bloques. No asigna un nivel oficial, no entrega el sello y no reemplaza la revisión de evidencias.</p>
-    ${signal('1. Organización y solución',`${answerText(fieldById.org_type)}\n${answerText(fieldById.solution_name)} — ${answerText(fieldById.solution_task)}`,'Identidad y descripción declaradas; la existencia y el funcionamiento se verifican después.')}
-    ${signal('2. Capacidad tecnológica',`${answerText(fieldById.stage)}\nAdaptación: ${answerText(fieldById.tech_owner)}\nAprendizaje: ${answerText(fieldById.learning)}`,'La etapa declarada no equivale automáticamente a un TRL certificado.')}
-    ${signal('3. Integración y cuidado',`Integración: ${answerText(fieldById.integration)}\nPortabilidad: ${answerText(fieldById.portability)}\nDatos personales: ${answerText(fieldById.personal_data)}\nDecisiones automáticas: ${answerText(fieldById.automated_decision)}`,'Las respuestas sensibles abren revisión especializada; no son una declaración de cumplimiento.')}
-    ${signal('4. Preparación para el Estado',`Experiencia: ${answerText(fieldById.b2g_experience)}\nRecursos: ${answerText(fieldById.resources)}\nSoporte: ${answerText(fieldById.support)}`,'La preparación se contrasta con un alcance concreto y responsabilidades acordadas.')}
-    ${signal('5. Valor público esperado',`${answerText(fieldById.public_value)}\nSituación: ${answerText(fieldById.public_situation)}\nCambio: ${answerText(fieldById.expected_change)}\nEvidencia: ${answerText(fieldById.measurement)}`,'Es una hipótesis de valor público y un método previsto, no impacto demostrado.')}
-    <h3 class="review-heading">Qué conviene preparar antes de la verificación</h3><ul class="todo">${todos.map(t=>`<li>${escapeHtml(t)}</li>`).join('')}</ul>
-    <p class="notice">Este resultado pertenece al Servicio 1 — Sello B-GovTech. El paso a evaluación y certificación depende de criterios y evidencias que deben ser acordados por el equipo responsable; el prototipo no toma esa decisión.</p>
+    ${demo?`<div class="demo-tag">Resultado ficticio · ${escapeHtml(demoActor)}</div>`:''}
+    <div class="result-mark">${star}</div><p class="result-ready">Perfil autodeclarado listo</p>
+    <h2 class="result-title">Tu punto de partida: ${escapeHtml(roleName)}</h2>
+    <div class="profile-summary"><strong>${role==='public'?'Una necesidad pública activa el ecosistema.':'Tu aporte puede hacerse visible sin fingir que ya está certificado.'}</strong><span>${role==='public'?'Esta ruta no evalúa a la entidad como proveedora ni le entrega un sello: prepara su conexión con el Servicio 3.':'La lectura usa lo declarado para orientar; la revisión de evidencia ocurre después y por capacidad.'}</span></div>
+    <div class="result-path" aria-label="Niveles de confianza"><span class="active">1 · Perfil autodeclarado</span><span>2 · Evidencia preparada</span><span>3 · Insignias verificadas</span><span>4 · Sello integral</span></div>
+    <h3 class="review-heading">Capacidades observadas en esta ruta</h3>
+    <div class="capability-list">${caps.map(c=>`<div class="capability"><span class="cap-code">${c.code}</span><div><strong>${escapeHtml(c.name)}</strong><small>${escapeHtml(c.reason)} · ${stateLabel(c.score)}</small></div><div class="cap-state" aria-label="${stateLabel(c.score)}"><span style="--score:${(c.score/3)*100}%"></span></div></div>`).join('')}</div>
+    <div class="outcome-grid"><section><h3>Fortalezas que ya aparecen</h3><ul>${(strengths.length?strengths:[{name:'Aún no hay una fortaleza suficientemente clara; el resultado sirve para orientar el primer apoyo.'}]).map(c=>`<li>${escapeHtml(c.name)}</li>`).join('')}</ul></section><section><h3>Prioridades — máximo dos</h3><ul>${(priorities.length?priorities:[{name:'Preparar evidencias de las capacidades declaradas.'}]).map(c=>`<li>${escapeHtml(c.name)}</li>`).join('')}</ul></section></div>
+    ${role==='public'?'<div class="badge-note"><strong>Resultado de la ruta pública:</strong> una ficha inicial de necesidad y la conexión sugerida con Explora / Servicio 3. No se asignan insignias ni sello.</div>':`<div class="badge-note"><strong>Insignias para conversar, no otorgadas:</strong> ${badgeCandidates.length?badgeCandidates.map(c=>`${c.code} · ${escapeHtml(c.name)}`).join(' · '):'primero conviene fortalecer y documentar las capacidades prioritarias.'}</div>`}
+    ${signal('Lo que activó esta lectura',`Papel: ${roleName}\nOrganización: ${answerText(fieldById.org_type)}\nValor público: ${answerText(fieldById.public_value)}\nEvidencia prevista: ${answerText(fieldById.measurement)}`,'La lógica cruza actor, prácticas y evidencia; no suma una nota pública ni compara organizaciones.')}
+    <h3 class="review-heading">Qué conviene preparar después</h3><ul class="todo">${todos.slice(0,4).map(t=>`<li>${escapeHtml(t)}</li>`).join('')}</ul>
+    <p class="notice"><strong>${escapeHtml(resultNext(role,priorities))}</strong><br>Este resultado pertenece al Servicio 1 — Sello B-GovTech. La certificación depende de criterios públicos y evidencias revisadas; el prototipo no toma esa decisión.</p>
     <div class="actions"><button class="primary" id="review">Revisar respuestas</button><button class="secondary" id="print">Imprimir orientación</button><button class="text-btn" id="restart">Empezar otra prueba</button></div>`;
   main.querySelector('#review').onclick=()=>showReview();
   main.querySelector('#print').onclick=()=>window.print();
-  main.querySelector('#restart').onclick=()=>{if(confirm('¿Empezar otra prueba? Se borrarán las respuestas de esta sesión.')){answers={};demo=false;returnToReview=false;visited.clear();activeIndex=0;showWelcome();}};
+  main.querySelector('#restart').onclick=()=>{if(confirm('¿Empezar otra prueba? Se borrarán las respuestas de esta sesión.')){answers={};demo=false;demoActor='';returnToReview=false;visited.clear();activeIndex=0;showWelcome();}};
   focusMain();animateMain(true);
   if(shouldAnimate())main.querySelector('.result-mark')?.animate([{opacity:.2,transform:'scale(.92) rotate(-7deg)'},{opacity:1,transform:'scale(1) rotate(0)'}],{duration:640,easing:'cubic-bezier(.32,.72,0,1)'});
 }
@@ -766,13 +868,22 @@ async function launch(event){
   animations.forEach(a=>a.cancel());welcome.classList.remove('launching');go(activeIndex);
 }
 
-const sample={
-  org_name:'Equipo Río (ficticio)',responsible_role:'Líder de producto',org_web:'',org_type:'private',solution_name:'Turno Claro',solution_task:'La solución revisa los documentos de un trámite antes de la visita y avisa qué falta.',solution_evidence:'demo',stage:'real',tech_owner:'shared',learning:'applied',rights:'license',integration:'ready',portability:'export',personal_data:'yes',automated_decision:'no',environments:'designed',resources:'partial',support:'defined',b2g_experience:'learning',legal_evidence:'identify',public_value:'administrative',public_situation:'Algunas personas deben volver a la oficina porque les falta un documento y no lo sabían.',beneficiary:'citizens',access_barrier:'Las personas con poca experiencia digital podrían necesitar acompañamiento.',expected_change:'Que las personas sepan qué documentos les faltan antes de desplazarse.',measurement:'both'
+const baseSample={
+  org_name:'Organización ficticia',responsible_role:'Persona responsable del aporte',org_web:'',org_type:'private',actor_role:'solution',solution_name:'Aporte demostrable',solution_task:'Permite resolver una tarea pública concreta y aprender de su uso.',solution_evidence:'demo',stage:'real',tech_owner:'shared',learning:'applied',rights:'license',integration:'ready',portability:'export',personal_data:'no',automated_decision:'no',environments:'designed',resources:'partial',support:'defined',b2g_experience:'learning',legal_evidence:'identify',public_value:'administrative',public_situation:'Un proceso público requiere demasiado tiempo y genera reprocesos para las personas.',beneficiary:'citizens',access_barrier:'Algunas personas pueden requerir acompañamiento o un canal alternativo.',expected_change:'Reducir reprocesos y hacer más clara la experiencia de las personas.',measurement:'both'
 };
-document.getElementById('example-button').onclick=()=>{
-  if(Object.keys(answers).length&&!confirm('¿Cargar el ejemplo ficticio? Reemplazará las respuestas de esta sesión.'))return;
-  answers=Object.fromEntries(Object.entries(sample).map(([id,v])=>[id,{value:v,detail:''}]));demo=true;blocks.forEach(b=>visited.add(b.id));showReview();
+const demoProfiles={
+  solution:{label:'Solucionador tecnológico',answers:{...baseSample,org_name:'Turno Claro · empresa ficticia',actor_role:'solution',solution_name:'Turno Claro',solution_task:'Revisa documentos de un trámite y avisa qué falta antes del desplazamiento.',stage:'real',integration:'ready',portability:'open',resources:'partial',b2g_experience:'learning'}},
+  ally:{label:'Aliado especializado',answers:{...baseSample,org_name:'Laboratorio Puente · academia ficticia',org_type:'academy',actor_role:'ally',solution_name:'Capacidad de prueba y diseño',solution_task:'Acompaña equipos para probar soluciones con personas usuarias y convertir hallazgos en decisiones.',stage:'controlled',learning:'applied',rights:'combined',resources:'planned',b2g_experience:'draft',legal_evidence:'ready',public_value:'social'}},
+  articulator:{label:'Articulador',answers:{...baseSample,org_name:'Red Conecta · organización ficticia',org_type:'private',actor_role:'articulator',solution_name:'Capacidad de articulación',solution_task:'Conecta retos públicos con equipos que pueden aportar tecnología, conocimiento o implementación.',learning:'pending',resources:'partial',b2g_experience:'submitted',public_value:'democratic',public_situation:'Las necesidades y capacidades del ecosistema no siempre se encuentran a tiempo.',beneficiary:'organizations',expected_change:'Lograr conexiones pertinentes y acuerdos de colaboración trazables.',measurement:'records'}},
+  public:{label:'Equipo público',answers:{...baseSample,org_name:'Entidad distrital ficticia',responsible_role:'Equipo de innovación',org_type:'public_entity',actor_role:'public',solution_name:'Necesidad por formular',solution_task:'Buscamos una capacidad externa para comprender y resolver una necesidad pública.',public_value:'administrative',public_situation:'El equipo recibe solicitudes repetidas y no cuenta con información suficiente para priorizarlas.',beneficiary:'staff',expected_change:'Contar con una necesidad bien formulada y actores pertinentes para explorar una solución.',measurement:'both'}}
 };
+function loadDemo(key){
+  const profile=demoProfiles[key];if(!profile)return;
+  if(Object.keys(answers).length&&!demo&&!confirm('¿Abrir el resultado ficticio? Reemplazará las respuestas de esta sesión.'))return;
+  answers=Object.fromEntries(Object.entries(profile.answers).map(([id,v])=>[id,{value:v,detail:''}]));demo=true;demoActor=profile.label;visited.clear();visibleBlocks().forEach(b=>visited.add(b.id));activeIndex=blocks.indexOf(visibleBlocks().at(-1));document.getElementById('welcome').hidden=true;document.getElementById('app-shell').hidden=false;document.body.classList.remove('is-welcome');showResult();
+}
+document.querySelectorAll('[data-demo]').forEach(button=>button.onclick=()=>loadDemo(button.dataset.demo));
+document.getElementById('example-button').onclick=()=>{showWelcome(false);document.getElementById('rutas').scrollIntoView({behavior:shouldAnimate()?'smooth':'auto',block:'start'});document.querySelector('[data-demo]')?.focus({preventScroll:true});};
 document.getElementById('begin').onclick=launch;
 document.getElementById('about').onclick=()=>{const info=document.getElementById('welcome-info'),button=document.getElementById('about');info.hidden=!info.hidden;button.setAttribute('aria-expanded',String(!info.hidden));};
 document.getElementById('home-button').onclick=()=>showWelcome();
